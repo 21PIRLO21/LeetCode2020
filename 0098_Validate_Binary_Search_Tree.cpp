@@ -3,7 +3,7 @@
 
 using namespace std;
 
-
+/* medium */
 /* Definition for a binary tree node. */
 struct TreeNode {
     int val;
@@ -11,24 +11,24 @@ struct TreeNode {
     TreeNode *right;
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
- 
+
+// 中序遍历非递归，LDR
 class Solution {
 public:
-    // 中序遍历非递归，LDR
     bool isValidBST(TreeNode* root) {
-        if(root  == NULL)
+        if (root  == NULL)
             return true;
         TreeNode *nodeStack[5000], *temp = root;
         // nodeStack[0] = root;
         int top = -1;
         long min_val = LONG_MIN;
-        while(top >= 0 || temp){
-            while(temp){
+        while (top >= 0 || temp) {
+            while (temp) {
                 nodeStack[++top] = temp;
                 temp = temp -> left;
             }
             temp = nodeStack[top--];
-            if(temp -> val <= min_val)
+            if (temp -> val <= min_val)
                 return false;
             min_val = temp -> val;
             temp = temp -> right;
