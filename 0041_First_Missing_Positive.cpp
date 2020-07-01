@@ -3,18 +3,20 @@
 
 using namespace std;
 
+/* Hard */
 class Solution {
 public:
     // 别人正确的解法
     int firstMissingPositive(vector<int> &nums) {
         for (int i = 0; i < nums.size(); i++) {
             while (nums[i] != i + 1) {
+                // nums[i] = nums[nums[i] - 1] 如果之前出现过nums[i], 那么这个数的下标应该是nums[i] - 1;
                 if (nums[i] <= 0 || nums[i] > nums.size() || nums[i] == nums[nums[i] - 1])
-                    break;
-                // 将nums[i] 放置到对应位置上[1,2,3...]
-                int idx = nums[i] - 1;
-                nums[i] = nums[idx];
-                nums[idx] = idx + 1;
+                    break; // 小于0，大于数组长度 或 重复出现的 就先不要管了
+                // swap(nums[i], nums[nums[i] - 1]);, 将nums[i] 放置到对应位置上[1,2,3...]
+                int temp = nums[i] - 1;
+                nums[i] = nums[temp];
+                nums[temp] = temp + 1;
             }
         }
         for (int i = 0; i < nums.size(); i++) {
@@ -22,6 +24,7 @@ public:
                 return (i + 1);
             }
         }
+        // // 都正确则返回数组长度 + 1
         return (nums.size() + 1);
     }
 /*  // 自己的错误答案
