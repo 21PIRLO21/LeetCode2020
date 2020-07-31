@@ -6,7 +6,7 @@
 using namespace std;
 
 /* Medium */
-class Solution {
+class Solution_1 {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
         // 学习一下auto的用法
@@ -30,7 +30,6 @@ public:
     }
 };
 
-// the fastest
 class Solution_2 {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
@@ -54,5 +53,24 @@ public:
             }
         }
         return false;
+    }
+};
+
+// the fastest
+class Solution_3 {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int n = s.size();
+        vector<int> dp(n + 1, false);
+        dp[0] = true;
+        for (int i = 1; i <= n; i++) {
+            for (string word: wordDict) {
+                if (i >= word.size()) {
+                    dp[i] = (dp[i - word.size()] && (s.substr(i - word.size(), word.size()) == word));
+                    if (dp[i]) break;
+                }
+            }
+        }
+        return dp.back();
     }
 };

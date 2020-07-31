@@ -4,7 +4,7 @@
 
 using namespace std;
 
-/* easy */
+/* Easy */
 
 /* Definition for a binary tree node. */
 struct TreeNode {
@@ -44,8 +44,8 @@ public:
             return NULL;
         int mid = (begin + end) / 2;
         TreeNode * pt = new TreeNode(nums[mid]);
-        pt -> left = helper(nums, begin, mid - 1);
-        pt -> right = helper(nums, mid + 1, end);
+        pt->left = helper(nums, begin, mid - 1);
+        pt->right = helper(nums, mid + 1, end);
         return pt;
     }
 };
